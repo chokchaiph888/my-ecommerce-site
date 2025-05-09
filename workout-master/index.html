@@ -1483,42 +1483,44 @@
             <!-- Tab panes -->
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="contact-us">
-                <form method="post" data-aos="fade">
+                <form method="post" action="test.php" data-aos="fade">
                   <div class="form-group row">
                     <div class="col-md-6 mb-3 mb-lg-0">
-                      <input type="text" class="form-control" placeholder="First name">
+                      <input id="fname" type="text" class="form-control" placeholder="First name">
                     </div>
                     <div class="col-md-6">
-                      <input type="text" class="form-control" placeholder="Last name">
+                      <input id="lname" type="text" class="form-control" placeholder="Last name">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <input type="email" class="form-control" placeholder="Email">
+                      <input id="email" type="text" class="form-control" placeholder="Email">
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <div class="col-md-12">
-                     <!--<input type="text" class="form-control" placeholder="Subject"> -->
-                      <select id="subject-select" class="form-control" onchange ="show()">
-                      <option value ="">Subject</option>
+                      
+
+                      <select id="subject-select" name="subjectSelect" class="form-control">
+                        <option value="=">Subject</option>
                       </select>
                     </div>
                   </div>
 
+
                   <div class="form-group row">
                     <div class="col-md-12">
-                      <textarea class="form-control" id="" cols="30" rows="10"
-                        placeholder="Write your message here."></textarea>
+                      <textarea id="message" name="message" class="form-control" id="" placeholder="Message"></textarea>
                     </div>
                   </div>
 
                   <div class="form-group row">
                     <div class="col-md-6">
 
-                      <input type="submit" class="btn btn-primary py-3 px-5 btn-block" value="Send Message">
+                      <input type="button" onclick="submitContact()" class="btn btn-primary py-3 px-4"
+                        value="Send Message">
                     </div>
                   </div>
 
@@ -1556,7 +1558,7 @@
 
                 </form>
               </div>
-              <div role="tabpanel" class="tab-pane" id="sing-in">
+              <div role="tabpanel" class="tab-pane" id="sign-in">
                 <form method="post" data-aos="fade">
 
                   <div class="form-group row">
@@ -1577,18 +1579,14 @@
                       <input type="submit" class="btn btn-primary py-3 px-5 btn-block" value="Login">
                     </div>
                   </div>
-
                 </form>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </div>
   </div>
-
 
 
   <footer class="footer-section bg-dark">
@@ -1613,6 +1611,7 @@
           <h3 class="text-white">Subscribe</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus, odio beatae accusantium.
           </p>
+
           <form action="#">
             <div class="d-flex mb-5">
               <input type="text" class="form-control rounded-0" placeholder="Email">
@@ -1620,14 +1619,13 @@
             </div>
           </form>
         </div>
-
       </div>
 
       <div class="row pt-5 mt-5 text-center">
         <div class="col-md-12">
           <div class=" pt-5">
+            
             <p>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
               Copyright &copy;
               <script data-cfasync="false"
                 src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
@@ -1635,7 +1633,7 @@
               with
               <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com"
                 target="_blank">Colorlib</a>
-              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              
             </p>
           </div>
         </div>
@@ -1643,11 +1641,7 @@
       </div>
     </div>
   </footer>
-
-
-
   </div>
-  <!-- .site-wrap -->
 
   <script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
@@ -1663,15 +1657,9 @@
   <script src="js/jquery.fancybox.min.js"></script>
   <script src="js/jquery.sticky.js"></script>
   <script src="js/jquery.mb.YTPlayer.min.js"></script>
-
-
-
-
   <script src="js/main.js"></script>
-
+  
   <script>
-
-
 
     function loadDoc(url, cFunction) {
       const xhttp = new XMLHttpRequest();
@@ -1679,103 +1667,133 @@
       xhttp.open("GET", url);
       xhttp.send();
     }
-
     function classXML(xmlDoc) {
       // action goes here
-      console.log("hi");
+      console.log("HI");
       var xmlData = xmlDoc.responseXML;
       var class_list = xmlData.getElementsByTagName("class");
       console.log(class_list);
       var html_text = "";
-      for (var i=0;i<class_list.length;i++){
+      for (var i = 0; i < class_list.length; i++) {
         var single_page = class_list[i].getElementsByTagName("single-page")[0].childNodes[0].nodeValue;
         var image = class_list[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
         var time = class_list[i].getElementsByTagName("time")[0].childNodes[0].nodeValue;
         var name = class_list[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
         var instructor = class_list[i].getElementsByTagName("instructor")[0].childNodes[0].nodeValue;
         var duration = class_list[i].getElementsByTagName("duration")[0].childNodes[0].nodeValue;
+
+
         console.log(instructor);
-       html_text +='<div class="class-item d-flex align-items-center">'+
-                  '<a href="'+single_page+'" class="class-item-thumbnail">'+
-                    '<img src="'+image+'" alt="Image">'+
-                  '</a>'+
-                  
-                  '<div class="class-item-text">'+
-                    '<span>'+time+'</span>'+
-                    '<h2><a href="'+single_page+'">Fitness Class Name #1</a></h2>'+
-                    '<span>'+instructor+'</span>,'+
-                    '<span>'+duration+'</span>'+
-                  '</div>'+
-                '</div>'
-                
+
+        html_text +=
+          '<div class="class-item d-flex align-items-center">' +
+          '<a href="' + single_page + '" class="class-item-thumbnail">' +
+          '<img src="' + image + '" alt="Image">' +
+          '</a>' +
+          '<div class="class-item-text">' +
+          '<span>' + time + '</span>' +
+          '<h2><a href="' + single_page + '">' + name + '</a></h2>' +
+          '<span>' + instructor + '</span>,' +
+          '<span>' + duration + '</span>,' +
+          '</div>' +
+          '</div>'
+
       }
       console.log(html_text);
       document.getElementById('nav-sunday').children[0].children[0].innerHTML = html_text;
-
     }
+
+
     function classJSON(jsonDoc) {
-      // action goes here
-      
       const jsonData = jsonDoc.responseText;
       console.log(jsonData);
-      const jsonObj = JSON.parse(jsonData);
+      const jsonObj = JSON.parse(jsonData)
       console.log(jsonObj.classes);
       var html_text = "";
-      for(let i in jsonObj.classes){
-        html_text +='<div class="class-item d-flex align-items-center">'+
-                  '<a href="'+jsonObj.classes[i]["single-page"]+'" class="class-item-thumbnail">'+
-                    '<img src="'+jsonObj.classes[i]["image"]+'" alt="Image">'+
-                  '</a>'+
-                  
-                  '<div class="class-item-text">'+
-                    '<span>'+jsonObj.classes[i]["time"]+'</span>'+
-                    '<h2><a href="'+jsonObj.classes[i]["single-page"]+'">Fitness Class Name #1</a></h2>'+
-                    '<span>'+jsonObj.classes[i]["instructor"]+'</span>,'+
-                    '<span>'+jsonObj.classes[i]["duratrion"]+'</span>'+
-                  '</div>'+
-                '</div>'
+      for (let i in jsonObj.classes) {
+        html_text +=
+          '<div class="class-item d-flex align-items-center">' +
+          '<a href="' + jsonObj.classes[i]["single-page"] + '" class="class-item-thumbnail">' +
+          '<img src="' + jsonObj.classes[i]["image"] + '" alt="Image">' +
+          '</a>' +
+          '<div class="class-item-text">' +
+          '<span>' + jsonObj.classes[i]["time"] + '</span>' +
+          '<h2><a href="' + jsonObj.classes[i]["single-page"] + '">' + jsonObj.classes[i]["name"] + '</a></h2>' +
+          '<span>' + jsonObj.classes[i]["instructor"] + '</span>,' +
+          '<span>' + jsonObj.classes[i]["duration"] + '</span>,' +
+          '</div>' +
+          '</div>'
       }
-      
+      console.log(html_text);
       document.getElementById('nav-sunday').children[0].children[1].innerHTML = html_text;
+
     }
 
-    function loadSubject(file){
+    function loadSubject(File) {
       const select = document.getElementById("subject-select");
-      fetch(file)
-      .then(jsonDoc => jsonDoc.json())
-      .then(jsonObj => {
-        console.log(jsonObj.contactSubject);
-        jsonObj.contactSubject.forEach(job => {
-          console.log(job)
-          const option = document.createElement("option")
-          option.textContent = job;
-          option.value = job;
-          select.appendChild(option);
-          
-          
-        });
-      })
+      fetch(File)
+        .then(jsonDoc => jsonDoc.json())
+        .then(jsonObj => {
+          console.log(jsonObj.contactSubject);
+          jsonObj.contactSubject.forEach(job => {
+            console.log(job)
+            const option = document.createElement("option")
+            option.textContent = job;
+            option.value = job;
+            select.appendChild(option);
+          });
+        })
     }
 
-    function show(){
+    function show() {
       const select = document.getElementById("subject-select");
-      console.log(select.value)
+      alert(select.value)
     }
-
-
     window.onload = function () {
       const contact = document.getElementById("contact-head");
-      contact.innerHTML = "WoooW";
+      contact.innerHTML = "HIIIIII";
 
       loadDoc("./xml/class_sunday.xml", classXML);
-
       loadDoc("./json/class_sunday.json", classJSON);
-
-      loadSubject('http://localhost:4040/subject');
-
-      //loadSubject("./json/contact_subject.json");
-      
+      loadSubject('http://localhost:4000/api/subject');
     };
+  
+    const ajax = async (config) => {
+      const request = await fetch(config.url, {
+        method: config.method || 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(config.data)
+      });
+      const response = await request.json();
+      console.log(response);
+      return response;
+    }
+
+
+
+    function submitContact() {
+      const data = {
+        fname: document.getElementById("fname").value,
+        lname: document.getElementById("lname").value,
+        email: document.getElementById("email").value,
+        subject: document.getElementById("subject-select").value,
+        message: document.getElementById("message").value
+      }
+      console.log(data);
+      let response = ajax({
+        url : 'http://localhost:4000/api/contact',
+        method : 'POST',
+        data : data
+
+
+      });
+
+   console.log(response)
+    }
+
   </script>
 </body>
 
